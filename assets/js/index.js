@@ -98,15 +98,13 @@ $(document).on("click", ".saveBtn", function (e) {
   const timeblockEl = $(e.currentTarget).parent();
   // get the input value inside the timeblock
   const inputVal = timeblockEl.find("input").val();
-
-  if (inputVal) {
-    // get the hour of the timeblock
-    const currHourStr = timeblockEl.find(".hour").text();
-    // date JS Date using the hour string
-    const currDate = moment(currHourStr, "hA").toDate();
-    // save event in local storage
-    saveEventToLocalStorage(currDate, inputVal);
-
+  // get the hour of the timeblock
+  const currHourStr = timeblockEl.find(".hour").text();
+  // date JS Date using the hour string
+  const currDate = moment(currHourStr, "hA").toDate();
+  // save event in local storage
+  saveEventToLocalStorage(currDate, inputVal);
+  if (inputVal !== "") {
     // show message to tell user that event is added
     $(".event-added").removeClass("invisible");
     setTimeout(function () {
