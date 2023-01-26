@@ -78,7 +78,7 @@ function buildTimeblocks(startingHour, endingHour) {
 }
 
 // save an event
-function saveEvent(date, eventStr) {
+function saveEventToLocalStorage(date, eventStr) {
   const ISOStr = moment(date).toISOString();
   // get local storage, if it's null then create a new object
   let storageObj = localStorage.getItem(APP_ID)
@@ -105,7 +105,7 @@ $(document).on("click", ".saveBtn", function (e) {
     // date JS Date using the hour string
     const currDate = moment(currHourStr, "hA").toDate();
     // save event in local storage
-    saveEvent(currDate, inputVal);
+    saveEventToLocalStorage(currDate, inputVal);
 
     // show message to tell user that event is added
     $(".event-added").removeClass("invisible");
