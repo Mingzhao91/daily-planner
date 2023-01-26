@@ -25,6 +25,7 @@ function getTimeblockHourEl(hour) {
 function getTimeblockInputEl(hour) {
   // create an input tag to allow user to type in an event
   const eventInputEl = $("<input class='col-8 col-md-10' type='text'>");
+  // TODO: get value from local storage
   return eventInputEl;
 }
 
@@ -94,6 +95,13 @@ $(document).on("click", ".saveBtn", function (e) {
     const currDate = moment(currHourStr, "hA").toDate();
     // save event in local storage
     saveEvent(currDate, inputVal);
+
+    // show message to tell user that event is added
+    $(".event-added").removeClass("invisible");
+    setTimeout(function () {
+      // hide message after 3 seconds
+      $(".event-added").addClass("invisible");
+    }, 3000);
   }
 });
 
