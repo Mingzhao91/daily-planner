@@ -39,6 +39,14 @@ function getTimeblockInputEl(hour) {
   const currDate = moment(hour, "h").toDate();
   // restore event
   eventInputEl.val(getEventFromLocalStorage(currDate));
+
+  // get current hour for comparison
+  const currHour = moment().hour();
+
+  // set colour on each timeblock based on past, present, and future
+  eventInputEl.addClass(
+    currHour > hour ? "past" : currHour === hour ? "present" : "future"
+  );
   return eventInputEl;
 }
 
