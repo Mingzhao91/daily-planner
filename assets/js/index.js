@@ -22,10 +22,23 @@ function getTimeblockHourEl(hour) {
   return hourEl;
 }
 
+// get an event from local storage
+function getEventFromLocalStorage(date) {
+  const ISOStr = moment(date).toISOString();
+  // get local storage, if it's null then create a new object
+  let storageObj = localStorage.getItem(APP_ID)
+    ? JSON.parse(localStorage.getItem(APP_ID))
+    : {};
+  return storageObj[ISOStr] || "";
+}
+
 function getTimeblockInputEl(hour) {
   // create an input tag to allow user to type in an event
   const eventInputEl = $("<input class='col-8 col-md-10' type='text'>");
-  // TODO: get value from local storage
+  // date JS Date using the hour
+  const currDate = moment(hour, "h").toDate();
+  // restore event
+  eventInputEl.val(getEventFromLocalStorage(currDate));
   return eventInputEl;
 }
 
@@ -67,8 +80,6 @@ function buildTimeblocks(startingHour, endingHour) {
 // save an event
 function saveEvent(date, eventStr) {
   const ISOStr = moment(date).toISOString();
-  console.log(ISOStr);
-
   // get local storage, if it's null then create a new object
   let storageObj = localStorage.getItem(APP_ID)
     ? JSON.parse(localStorage.getItem(APP_ID))
