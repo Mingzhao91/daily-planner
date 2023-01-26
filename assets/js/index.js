@@ -14,7 +14,7 @@ function showCurrentDate() {
 
 function getTimeblockHourEl(hour) {
   // create span tag to show offcie hour
-  const hourEl = $("<span class='hour'>");
+  const hourEl = $("<span class='col-2 col-md-1 hour'>");
   // get hour string in format of 1PM
   const hourShort = moment().hour(hour).format("hA");
 
@@ -24,13 +24,13 @@ function getTimeblockHourEl(hour) {
 
 function getTimeblockInputEl(hour) {
   // create an input tag to allow user to type in an event
-  const eventInputEl = $("<input type='text'>");
+  const eventInputEl = $("<input class='col-8 col-md-10' type='text'>");
   return eventInputEl;
 }
 
 function getTimeblockSaveBtnEl() {
   // create a save button to allow user to save an event
-  const saveBtn = $("<button class='saveBtn'>");
+  const saveBtn = $("<button class='col-2 col-md-1 saveBtn'>");
   const saveIconEl = $(`<i class="far fa-save">`);
   saveBtn.append(saveIconEl);
   return saveBtn;
@@ -38,7 +38,7 @@ function getTimeblockSaveBtnEl() {
 
 function getTimeblock(hour) {
   // create a timeblock element
-  const timeblockEl = $("<div class='time-block'>");
+  const timeblockEl = $("<div class='row time-block'>");
 
   // get all elements inside a timeblock
   const hourEl = getTimeblockHourEl(hour);
