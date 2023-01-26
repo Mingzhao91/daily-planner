@@ -1,5 +1,6 @@
 const OFFICE_HOUR_START_IN_24 = 9;
 const OFFICE_HOUR_END_IN_24 = 17;
+const APP_ID = "daily-planner";
 
 // show the current date in the title session
 function showCurrentDate() {
@@ -13,7 +14,7 @@ function showCurrentDate() {
 
 function getTimeblockHourEl(hour) {
   // create span tag to show offcie hour
-  const hourEl = $("<span>");
+  const hourEl = $("<span class='hour'>");
   // get hour string in format of 1PM
   const hourShort = moment().hour(hour).format("hA");
 
@@ -23,13 +24,13 @@ function getTimeblockHourEl(hour) {
 
 function getTimeblockInputEl(hour) {
   // create an input tag to allow user to type in an event
-  const eventInputEl = $("<input>");
+  const eventInputEl = $("<input type='text'>");
   return eventInputEl;
 }
 
 function getTimeblockSaveBtnEl() {
   // create a save button to allow user to save an event
-  const saveBtn = $("<button>");
+  const saveBtn = $("<button class='save-btn'>");
   const saveIconEl = $(`<i class="far fa-save">`);
   saveBtn.append(saveIconEl);
   return saveBtn;
@@ -52,16 +53,49 @@ function getTimeblock(hour) {
   return timeblockEl;
 }
 
+// add each timeblock into the timeblocks div
 function buildTimeblocks(startingHour, endingHour) {
   console.log("hello");
   // loop throught hours between starting hour and ending hour
   for (let hour = startingHour; hour <= endingHour; hour++) {
-    console.log("hour: ", hour);
-
     // append timeblock in timeblocks container
     $("#timeblocks").append(getTimeblock(hour));
   }
 }
+
+// save an event
+function saveEvent(date, eventStr) {
+  const ISOStr = moment(date).toISOString();
+  console.log(ISOStr);
+
+  // get local storage, if it's null then create a new object
+  let storageObj = localStorage.getItem(APP_ID)
+    ? JSON.parse(localStorage.getItem(APP_ID))
+    : {};
+
+  // store an event using ISO string is a key and event is a string
+  storageObj[ISOStr] = eventStr;
+
+  // save an event into local storage
+  localStorage.setItem(APP_ID, JSON.stringify(storageObj));
+}
+
+// listener on click to find which button is clicked
+$(document).on("click", ".save-btn", function (e) {
+  // get the timeblock that the button is in
+  const timeblockEl = $(e.currentTarget).parent();
+  // get the input value inside the timeblock
+  const inputVal = timeblockEl.find("input").val();
+
+  if (inputVal) {
+    // get the hour of the timeblock
+    const currHourStr = timeblockEl.find(".hour").text();
+    // date JS Date using the hour string
+    const currDate = moment(currHourStr, "hA").toDate();
+    // save event in local storage
+    saveEvent(currDate, inputVal);
+  }
+});
 
 // start the application
 function start() {
