@@ -30,7 +30,7 @@ function getTimeblockInputEl(hour) {
 
 function getTimeblockSaveBtnEl() {
   // create a save button to allow user to save an event
-  const saveBtn = $("<button class='save-btn'>");
+  const saveBtn = $("<button class='saveBtn'>");
   const saveIconEl = $(`<i class="far fa-save">`);
   saveBtn.append(saveIconEl);
   return saveBtn;
@@ -38,7 +38,7 @@ function getTimeblockSaveBtnEl() {
 
 function getTimeblock(hour) {
   // create a timeblock element
-  const timeblockEl = $("<div>");
+  const timeblockEl = $("<div class='time-block'>");
 
   // get all elements inside a timeblock
   const hourEl = getTimeblockHourEl(hour);
@@ -81,7 +81,7 @@ function saveEvent(date, eventStr) {
 }
 
 // listener on click to find which button is clicked
-$(document).on("click", ".save-btn", function (e) {
+$(document).on("click", ".saveBtn", function (e) {
   // get the timeblock that the button is in
   const timeblockEl = $(e.currentTarget).parent();
   // get the input value inside the timeblock
