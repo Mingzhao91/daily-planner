@@ -1,11 +1,6 @@
 const OFFICE_HOUR_START_IN_24 = 9;
 const OFFICE_HOUR_END_IN_24 = 17;
 
-// start the application
-function start() {
-  showCurrentDate();
-}
-
 // show the current date in the title session
 function showCurrentDate() {
   $(function () {
@@ -14,6 +9,11 @@ function showCurrentDate() {
     // set the text in currentDay paragraph
     $("#currentDay").text(currDateStr);
   });
+}
+
+// start the application
+function start() {
+  showCurrentDate();
 }
 
 start();
