@@ -2,7 +2,7 @@
 
 ## Description
 
-The daily planner application is built using jQuery and Moment.js. This application has a table where each business hour shows as a row. User can click on the middle column to insert an event for a timeblock. Clicking on the disk icon saves an event in the local storage. All saved events are retireved when the page is loaded.
+The daily planner application is built using jQuery and Moment.js. This application has a table where each business hour shows as a row. User can click on the middle column to insert an event for a timeblock. Clicking on the disk icon saves an event in the local storage. All saved events are restored when the page is loaded.
 
 ## Deployment
 
