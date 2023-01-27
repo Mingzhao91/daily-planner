@@ -101,6 +101,16 @@ function saveEventToLocalStorage(date, eventStr) {
   localStorage.setItem(APP_ID, JSON.stringify(storageObj));
 }
 
+// show message to tell user that event is added/deleted
+function showMessage(messageId) {
+  // show message to the user
+  $(`#${messageId}`).removeClass("d-none");
+  setTimeout(function () {
+    // hide message after 4 seconds
+    $(`#${messageId}`).addClass("d-none");
+  }, 4000);
+}
+
 // listener on click to find which button is clicked
 $(document).on("click", ".saveBtn", function (e) {
   // get the timeblock that the button is in
@@ -111,15 +121,21 @@ $(document).on("click", ".saveBtn", function (e) {
   const currHourStr = timeblockEl.find(".hour").text();
   // date JS Date using the hour string
   const currDate = moment(currHourStr, "hA").toDate();
+
+  // check if there's a event stored previously
+  const hasPreviousEvent = getEventFromLocalStorage(currDate) !== "";
+
   // save event in local storage
   saveEventToLocalStorage(currDate, inputVal);
+
   if (inputVal !== "") {
-    // show message to tell user that event is added
-    $(".event-added").removeClass("d-none");
-    setTimeout(function () {
-      // hide message after 3 seconds
-      $(".event-added").addClass("d-none");
-    }, 3000);
+    // show message if an event is added
+    showMessage("event-added-msg");
+  } else {
+    // show message if an event is deleted
+    if (hasPreviousEvent) {
+      showMessage("event-deleted-msg");
+    }
   }
 });
 
