@@ -6,7 +6,7 @@ The daily planner application is built using jQuery and Moment.js. This applicat
 
 ## Deployment
 
-Note down your event<a href="https://mingzhao91.github.io/daily-planner/" target="_blank">here</a>.
+Note down your event <a href="https://mingzhao91.github.io/daily-planner/" target="_blank">here</a>.
 <br/>
 
 ## Authors
