@@ -14,7 +14,9 @@ function showCurrentDate() {
 
 function getTimeblockHourEl(hour) {
   // create span tag to show offcie hour
-  const hourEl = $("<span class='col-2 col-md-1 hour'>");
+  const hourEl = $(
+    "<span class='col-2 col-md-1 d-flex align-items-center hour'>"
+  );
   // get hour string in format of 1PM
   const hourShort = moment().hour(hour).format("hA");
 
@@ -43,7 +45,7 @@ function getTimeblockInputEl(hour) {
   // get current hour for comparison
   const currHour = moment().hour();
 
-  // set colour on each timeblock based on past, present, and future
+  // set colour on each input based on past, present, and future
   eventInputEl.addClass(
     currHour > hour ? "past" : currHour === hour ? "present" : "future"
   );
