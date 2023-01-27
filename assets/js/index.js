@@ -116,10 +116,10 @@ $(document).on("click", ".saveBtn", function (e) {
   saveEventToLocalStorage(currDate, inputVal);
   if (inputVal !== "") {
     // show message to tell user that event is added
-    $(".event-added").removeClass("invisible");
+    $(".event-added").removeClass("d-none");
     setTimeout(function () {
       // hide message after 3 seconds
-      $(".event-added").addClass("invisible");
+      $(".event-added").addClass("d-none");
     }, 3000);
   }
 });
