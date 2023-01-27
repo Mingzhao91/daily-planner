@@ -34,22 +34,22 @@ function getEventFromLocalStorage(date) {
   return storageObj[ISOStr] || "";
 }
 
-function getTimeblockInputEl(hour) {
+function getTimeblockTextareaEl(hour) {
   // create an input tag to allow user to type in an event
-  const eventInputEl = $("<textarea class='col-8 col-md-10'>");
+  const eventTextareaEl = $("<textarea class='col-8 col-md-10'>");
   // date JS Date using the hour
   const currDate = moment(hour, "h").toDate();
   // restore event
-  eventInputEl.val(getEventFromLocalStorage(currDate));
+  eventTextareaEl.val(getEventFromLocalStorage(currDate));
 
   // get current hour for comparison
   const currHour = moment().hour();
 
   // set colour on each input based on past, present, and future
-  eventInputEl.addClass(
+  eventTextareaEl.addClass(
     currHour > hour ? "past" : currHour === hour ? "present" : "future"
   );
-  return eventInputEl;
+  return eventTextareaEl;
 }
 
 function getTimeblockSaveBtnEl() {
@@ -66,12 +66,12 @@ function getTimeblock(hour) {
 
   // get all elements inside a timeblock
   const hourEl = getTimeblockHourEl(hour);
-  const inputEl = getTimeblockInputEl(hour);
+  const textareaEl = getTimeblockTextareaEl(hour);
   const saveBtnEl = getTimeblockSaveBtnEl();
 
   // append individual elements into timeblock element
   timeblockEl.append(hourEl);
-  timeblockEl.append(inputEl);
+  timeblockEl.append(textareaEl);
   timeblockEl.append(saveBtnEl);
 
   return timeblockEl;
@@ -79,7 +79,6 @@ function getTimeblock(hour) {
 
 // add each timeblock into the timeblocks div
 function buildTimeblocks(startingHour, endingHour) {
-  console.log("hello");
   // loop throught hours between starting hour and ending hour
   for (let hour = startingHour; hour <= endingHour; hour++) {
     // append timeblock in timeblocks container
@@ -107,7 +106,7 @@ $(document).on("click", ".saveBtn", function (e) {
   // get the timeblock that the button is in
   const timeblockEl = $(e.currentTarget).parent();
   // get the input value inside the timeblock
-  const inputVal = timeblockEl.find("input").val();
+  const inputVal = timeblockEl.find("textarea").val();
   // get the hour of the timeblock
   const currHourStr = timeblockEl.find(".hour").text();
   // date JS Date using the hour string
