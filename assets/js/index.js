@@ -36,7 +36,7 @@ function getEventFromLocalStorage(date) {
 
 function getTimeblockInputEl(hour) {
   // create an input tag to allow user to type in an event
-  const eventInputEl = $("<input class='col-8 col-md-10' type='text'>");
+  const eventInputEl = $("<textarea class='col-8 col-md-10'>");
   // date JS Date using the hour
   const currDate = moment(hour, "h").toDate();
   // restore event
